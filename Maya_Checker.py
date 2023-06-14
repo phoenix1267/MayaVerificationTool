@@ -136,10 +136,6 @@ class MayaChecker(qw.QWidget):
         for o in Objs:
             pivotPointScale = cmds.getAttr(o+'.scalePivot')[0]
             pivotPointRot = cmds.getAttr(o+'.rotatePivot')[0]
-            translate = cmds.getAttr(o+'.translate')[0]
-            print(pivotPointScale)
-            print(pivotPointRot)
-            print(translate)
             if pivotPointScale != (0,0,0) or pivotPointRot != (0,0,0): 
                 self.log.appendPlainText("Pivot for \"{}\" is not at (0,0,0)".format(o))
                 if self.canRepositionPivot.isChecked():
