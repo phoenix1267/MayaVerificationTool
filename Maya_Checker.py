@@ -191,6 +191,14 @@ class MayaChecker(qw.QWidget):
                 polyMergeVertex(d = .01)
 
     def verifyAll(self):
+        done = False
+        if self.autoClear.isChecked():
+            self.log.setPlainText("")
+            self.autoClear.setChecked(False)
+            done = True
+        else:
+            self.log.appendPlainText("*--------------------------------------------*")
+            
         sel = om.MGlobal.getActiveSelectionList()
         if not sel.length():
             return self.log.appendPlainText('Nothing Selected')
@@ -199,6 +207,10 @@ class MayaChecker(qw.QWidget):
         self.verify_UV()
         self.verifyPivot()
         self.verifyOverlapingVertexs()
+        if done:
+            self.autoClear.setChecked(True)
+        else:
+            self.log.appendPlainText("*--------------------------------------------*")
 ###
 app = MayaChecker()
 app.show()
